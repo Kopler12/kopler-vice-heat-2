@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VICE HEAT — Cover Art Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="shot-root" hidden></div>
+
+<div id="editor-root">
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">VICE&nbsp;HEAT</span>
+      <span class="brand-sub">cover art maker</span>
+    </div>
+    <div class="header-actions">
+      <label class="size-label" for="export-size">Export size</label>
+      <select id="export-size">
+        <option value="1080x1080">1080 × 1080 (square)</option>
+        <option value="1080x1350" selected>1080 × 1350 (portrait)</option>
+        <option value="1920x1080">1920 × 1080 (landscape)</option>
+      </select>
+      <button id="export-button" class="primary-button" type="button">Export PNG</button>
+    </div>
+  </header>
+
+  <main class="editor-layout">
+    <section class="stage">
+      <canvas id="cover-canvas" width="1080" height="1350"></canvas>
+      <p class="stage-hint">Click a panel to select it. Drag on the canvas to reposition its photo.</p>
+    </section>
+
+    <aside class="controls">
+      <div class="control-group">
+        <h2>Photos</h2>
+        <label class="file-button">
+          Upload photos
+          <input id="photo-input" type="file" accept="image/*" multiple hidden>
+        </label>
+        <button id="load-samples-button" type="button">Load sample photos</button>
+        <button id="fill-one-button" type="button">Fill all panels with selected photo</button>
+        <div id="photo-tray" class="photo-tray" aria-label="Uploaded photos"></div>
+        <p class="tiny-note">Tip: select a panel, then click a photo thumbnail to assign it.</p>
+      </div>
+
+      <div class="control-group">
+        <h2>Layout</h2>
+        <div id="layout-picker" class="button-row" role="group" aria-label="Panel layout">
+          <button type="button" data-layout="grid6" class="toggle-button is-active">Six-Panel Grid</button>
+          <button type="button" data-layout="heroTrio" class="toggle-button">Hero + Trio</button>
+          <button type="button" data-layout="duo" class="toggle-button">Duo Split</button>
+          <button type="button" data-layout="poster" class="toggle-button">Full-Bleed Poster</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2>Colour grade</h2>
+        <div id="grade-picker" class="button-row" role="group" aria-label="Colour grade">
+          <button type="button" data-grade="sunset" class="toggle-button is-active">Sunset Boulevard</button>
+          <button type="button" data-grade="neon" class="toggle-button">Neon Nights</button>
+          <button type="button" data-grade="golden" class="toggle-button">Golden Hour</button>
+          <button type="button" data-grade="chrome" class="toggle-button">Midnight Chrome</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2>Selected panel</h2>
+        <p class="tiny-note">Panel <span id="selected-panel-label">1</span> of <span id="panel-count-label">6</span></p>
+        <label class="slider-label" for="zoom-slider">Zoom <span id="zoom-value">1.00×</span></label>
+        <input id="zoom-slider" type="range" min="1" max="3" step="0.01" value="1">
+        <label class="slider-label" for="offset-x-slider">Horizontal offset <span id="offset-x-value">0%</span></label>
+        <input id="offset-x-slider" type="range" min="-50" max="50" step="1" value="0">
+        <label class="slider-label" for="offset-y-slider">Vertical offset <span id="offset-y-value">0%</span></label>
+        <input id="offset-y-slider" type="range" min="-50" max="50" step="1" value="0">
+      </div>
+
+      <div class="control-group">
+        <h2>Caption</h2>
+        <label class="field-label" for="title-input">Title</label>
+        <input id="title-input" type="text" maxlength="24" value="VICE HEAT">
+        <label class="field-label" for="tagline-input">Tagline</label>
+        <input id="tagline-input" type="text" maxlength="60" value="One city. One summer. No way back.">
+        <label class="field-label" for="lettering-select">Lettering style</label>
+        <select id="lettering-select">
+          <option value="blockbuster" selected>Blockbuster</option>
+          <option value="neon">Neon Glow</option>
+          <option value="outline">Outlined</option>
+          <option value="chrome">Chrome</option>
+        </select>
+        <label class="field-label" for="stars-select">Wanted stars</label>
+        <select id="stars-select">
+          <option value="0">0 — clean record</option>
+          <option value="1">★ 1</option>
+          <option value="2">★★ 2</option>
+          <option value="3">★★★ 3</option>
+          <option value="4">★★★★ 4</option>
+          <option value="5" selected>★★★★★ 5 — most wanted</option>
+        </select>
+        <label class="field-label" for="badge-input">Badge ribbon text (optional)</label>
+        <input id="badge-input" type="text" maxlength="26" value="DELUXE EDITION">
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

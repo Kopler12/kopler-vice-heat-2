@@ -1,0 +1,209 @@
+/* VICE HEAT — editor styling. Dark control room, neon-vice accents. */
+
+:root {
+  --ink: #12081f;
+  --panel: #1d1030;
+  --panel-edge: #3a2060;
+  --text: #f6eefc;
+  --muted: #b9a6d6;
+  --hot-pink: #ff2e88;
+  --sunset: #ff9a3d;
+  --aqua: #22d3ee;
+  --gold: #ffd23d;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(1200px 700px at 20% -10%, #3b1154 0%, var(--ink) 55%) fixed, var(--ink);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- header ---------- */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 22px;
+  border-bottom: 2px solid var(--panel-edge);
+  background: rgba(18, 8, 31, 0.85);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.brand { display: flex; align-items: baseline; gap: 12px; }
+
+.brand-mark {
+  font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+  background: linear-gradient(180deg, #ffe259 0%, #ffa751 45%, #ff2e88 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.brand-sub {
+  color: var(--aqua);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+.size-label { color: var(--muted); font-size: 13px; }
+
+select, input[type="text"] {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--hot-pink); }
+
+.primary-button {
+  background: linear-gradient(90deg, var(--hot-pink), var(--sunset));
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 18px;
+}
+
+/* ---------- layout ---------- */
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 340px;
+  gap: 20px;
+  padding: 20px 22px 40px;
+  align-items: start;
+}
+
+.stage { text-align: center; }
+
+#cover-canvas {
+  width: min(100%, 62vh);
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 2px #000;
+  cursor: grab;
+  touch-action: none;
+  background: #000;
+}
+
+#cover-canvas:active { cursor: grabbing; }
+
+.stage-hint { color: var(--muted); font-size: 13px; }
+
+/* ---------- controls ---------- */
+
+.controls { display: flex; flex-direction: column; gap: 16px; }
+
+.control-group {
+  background: rgba(29, 16, 48, 0.9);
+  border: 1px solid var(--panel-edge);
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+}
+
+.control-group h2 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.control-group button { margin: 0 6px 8px 0; }
+
+.file-button {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--aqua), #3b82f6);
+  color: #06121f;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 0 6px 8px 0;
+}
+
+.button-row { display: flex; flex-wrap: wrap; }
+
+.toggle-button.is-active {
+  background: linear-gradient(90deg, var(--hot-pink), var(--sunset));
+  color: #fff;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.photo-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.photo-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--panel-edge);
+  cursor: pointer;
+  padding: 0;
+}
+
+.photo-thumb.is-assigned { border-color: var(--gold); }
+
+.tiny-note { color: var(--muted); font-size: 12px; margin: 6px 0 0; }
+
+.field-label, .slider-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 10px 0 4px;
+}
+
+.slider-label span { color: var(--text); float: right; }
+
+input[type="text"], .control-group select { width: 100%; }
+
+input[type="range"] { width: 100%; accent-color: var(--hot-pink); }
+
+/* ---------- shot mode ---------- */
+
+body.shot-mode { background: #000; overflow: hidden; }
+
+#shot-root { position: fixed; inset: 0; }
+
+#shot-root canvas { display: block; width: 100vw; height: 100vh; }
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 900px) {
+  .editor-layout { grid-template-columns: 1fr; }
+  #cover-canvas { width: min(100%, 90vw); }
+  .app-header { flex-wrap: wrap; }
+}
